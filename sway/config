@@ -1,0 +1,80 @@
+# fix 20 second app open times
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec lxpolkit
+
+# window style
+gaps inner 8
+gaps outer 8
+default_border none
+
+# using the super key
+set $mod Mod4
+
+# set terminal and menu
+set $term kitty
+set $menu wofi -I --show drun | xargs swaymsg exec --
+
+# set british keyboard layout
+input * {
+	xkb_layout "gb"
+}
+
+# windows and sway
+bindsym Mod4+q kill
+bindsym Mod4+Shift+c reload
+bindsym Mod4+Shift+e exit
+
+# move focus
+bindsym Mod4+Left focus left
+bindsym Mod4+Right focus right
+bindsym Mod4+Up focus up
+bindsym Mod4+Down focus down
+
+# move windows
+bindsym Mod4+Shift+Left move left
+bindsym Mod4+Shift+Right move right
+bindsym Mod4+Shift+Up move up
+bindsym Mod4+Shift+Down move down
+
+# workspaces
+bindsym Mod4+1 workspace number 1
+bindsym Mod4+2 workspace number 2
+bindsym Mod4+3 workspace number 3
+bindsym Mod4+4 workspace number 4
+bindsym Mod4+5 workspace number 5
+bindsym Mod4+6 workspace number 6
+bindsym Mod4+7 workspace number 7
+bindsym Mod4+8 workspace number 8
+bindsym Mod4+9 workspace number 9
+
+bindsym Mod4+Shift+1 move container to workspace number 1
+bindsym Mod4+Shift+2 move container to workspace number 2
+bindsym Mod4+Shift+3 move container to workspace number 3
+bindsym Mod4+Shift+4 move container to workspace number 4
+bindsym Mod4+Shift+5 move container to workspace number 5
+bindsym Mod4+Shift+6 move container to workspace number 6
+bindsym Mod4+Shift+7 move container to workspace number 7
+bindsym Mod4+Shift+8 move container to workspace number 8
+bindsym Mod4+Shift+9 move container to workspace number 9
+
+# status bar
+bar {
+	position top
+	status_command while ~/.config/sway/status.sh; do sleep 1; done
+	colors {
+		statusline #ffffff
+		background #323232
+		inactive_workspace #32323200 #32323200 #5c5c5c
+	}
+}
+
+# shortcuts
+bindsym Mod4+Return exec $term
+bindsym Mod4+Space exec $menu
+bindsym Mod4+f exec thunar
+bindsym Mod4+e exec nvim
+bindsym Mod4+b exec firefox-esr
+
+#wallpaper
+output * background ~/Pictures/background.png fill
+
